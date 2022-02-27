@@ -1,0 +1,44 @@
+---
+# awx-operator
+- name: create working directory
+  ansible.builtin.file:
+    state: directory
+    path: "{{ BASE_DIR }}"
+
+- name: clone repository
+  ansible.builtin.git:
+    repo: https://github.com/ansible/awx-operator.git
+    dest: "{{ BASE_DIR }}/awx-operator"
+    version: 0.17.0
+
+# - name: build awx-operator
+#   ansible.builtin.shell:
+#     cmd: |
+#       make docker-build IMG=zakihmkc/awx-operator:0.17.0
+# #      make docker-build IMAGE_TAG_BASE=zakihmkc/awx-operator VERSION=0.17.0-arm
+#     chdir: "{{ BASE_DIR }}/awx-operator"
+
+- name: build awx-operator
+  community.general.make:
+    chdir: "{{ BASE_DIR }}/awx-operator"
+    target: docker-build
+    params:
+      IMG: zakihmkc/awx-operator:0.17.0
+
+- name: push container image
+  community.docker.docker_image:
+    name: zakihmkc/awx-operator:0.17.0
+    repository: zakihmkc/awx-operator:0.17.0
+    push: true
+    source: local
+  vars:
+    ansible_python_interpreter: /home/ubuntu/venv/awx-build/bin/python
+  # environment:
+  #   PYTHONPATH: /home/ubuntu/venv/awx-build/lib/python3.9/site-packages/
+
+- name: deploy awx-operator
+  community.general.make:
+    chdir: "{{ BASE_DIR }}/awx-operator"
+    target: deploy
+    params:
+      IMG: zakihmkc/awx-operator:0.17.0

@@ -1,0 +1,29 @@
+---
+# awx-ee
+- name: create working directory
+  ansible.builtin.file:
+    state: directory
+    path: "{{ BASE_DIR }}/awx-ee"
+
+- name: clone repository
+  ansible.builtin.git:
+    repo: https://github.com/ansible/awx-ee.git
+    dest: "{{ BASE_DIR }}/awx-ee"
+    version: 0.6.0
+
+- name: build awx-ee
+  ansible.builtin.shell:
+    cmd: |
+      . /home/ubuntu/venv/awx-build/bin/activate
+      tox -edocker
+    chdir: "{{ BASE_DIR }}/awx-ee"
+
+- name: push container image
+  community.docker.docker_image:
+    name: quay.io/ansible/awx-ee
+    repository: zakihmkc/awx-ee:0.6.0
+    push: true
+    source: local
+    force_tag: true
+  vars:
+    ansible_python_interpreter: /home/ubuntu/venv/awx-build/bin/python

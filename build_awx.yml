@@ -1,0 +1,10 @@
+---
+- hosts: all
+  gather_facts: false
+
+  roles:
+    - build_awx/awx-operator
+    # - build_awx/awx
+    # - build_awx/awx-ee
+    # - build_awx/ansible-runner
+    # - build_awx/receptor

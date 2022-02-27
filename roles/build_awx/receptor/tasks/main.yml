@@ -1,0 +1,26 @@
+---
+# receptor
+- name: create working directory
+  ansible.builtin.file:
+    state: directory
+    path: "{{ BASE_DIR }}/receptor"
+
+- name: clone repository
+  ansible.builtin.git:
+    repo: https://github.com/ansible/receptor.git
+    dest: "{{ BASE_DIR }}/receptor"
+    # version: release_1.0
+    version: 1.0.0a2
+
+- name: build image
+  community.general.make:
+    chdir: "{{ BASE_DIR }}/receptor"
+    target: container
+    params:
+      CONTAINERCMD: docker
+      TAG: quay.io/project-receptor/receptor:1.0.0a2
+  # vars:
+  #   ansible_python_interpreter: /home/ubuntu/venv/awx-build/bin/python
+  environment:
+    PYTHONPATH: /home/ubuntu/venv/awx-build/lib/python3.9/site-packages/
+    # PYTHONPATH: /home/ubuntu/venv/awx-build/lib #/python3.9/site-packages/

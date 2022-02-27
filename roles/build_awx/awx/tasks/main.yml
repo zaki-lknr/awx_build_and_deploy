@@ -1,0 +1,29 @@
+---
+# awx
+- name: create working directory
+  ansible.builtin.file:
+    state: directory
+    path: "{{ BASE_DIR }}"
+
+- name: clone repository
+  ansible.builtin.git:
+    repo: https://github.com/ansible/awx.git
+    dest: "{{ BASE_DIR }}/awx"
+    version: 20.0.0
+
+# - name: create inventory
+#   ansible.builtin.file:
+#     content: |
+#       [all:vars]
+#       push=true
+#       awx_image
+
+- name: build awx
+  ansible.builtin.shell:
+    cmd: |
+      . /home/ubuntu/venv/awx-build/bin/activate
+      ansible-playbook build.yml
+    chdir: "{{ BASE_DIR }}/awx/tools/ansible"
+  # vars:
+  #   ansible_python_interpreter: /home/ubuntu/venv/awx-build/bin/python
+  # become: false

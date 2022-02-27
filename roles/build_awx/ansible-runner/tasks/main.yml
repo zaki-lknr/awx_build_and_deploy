@@ -1,0 +1,17 @@
+---
+# ansible-runner
+- name: create working directory
+  ansible.builtin.file:
+    state: directory
+    path: "{{ BASE_DIR }}/ansible-runner"
+
+- name: clone repository
+  ansible.builtin.git:
+    repo: https://github.com/ansible/ansible-runner.git
+    dest: "{{ BASE_DIR }}/ansible-runner"
+    version: 2.1.1
+
+- name: build image
+  community.general.make:
+    chdir: "{{ BASE_DIR }}/ansible-runner"
+    target: image

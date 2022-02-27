@@ -1,0 +1,35 @@
+---
+# ansible-builder
+- name: create working directory
+  ansible.builtin.file:
+    state: directory
+    path: "{{ BASE_DIR }}/ansible-builder"
+
+- name: clone repository
+  ansible.builtin.git:
+    repo: https://github.com/ansible/ansible-builder.git
+    dest: "{{ BASE_DIR }}/ansible-builder"
+    version: 1.0.1
+
+# - name: replace python to python3
+#   ansible.builtin.replace:
+#     path: "{{ BASE_DIR }}/ansible-builder/Makefile"
+#     regexp: python(?!3)
+#     replace: python3
+
+- name: alternatives python
+  community.general.alternatives:
+    name: python
+    link: /usr/bin/python
+    path: /usr/bin/python3
+  become: true
+  # make内で`python`が必要
+
+- name: build image
+  community.general.make:
+    chdir: "{{ BASE_DIR }}/ansible-builder"
+    target: image
+    # params:
+    #   PYTHON: python3
+  # vars:
+  #   ansible_python_interpreter: /home/ubuntu/venv/awx-build/bin/python

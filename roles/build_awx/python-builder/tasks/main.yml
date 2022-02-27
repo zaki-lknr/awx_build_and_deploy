@@ -1,0 +1,22 @@
+---
+# python-builder
+- name: create working directory
+  ansible.builtin.file:
+    state: directory
+    path: "{{ BASE_DIR }}/python-builder"
+
+- name: clone repository
+  ansible.builtin.git:
+    repo: https://github.com/ansible/python-builder-image.git
+    dest: "{{ BASE_DIR }}/python-builder"
+    version: main
+
+- name: build image
+  community.docker.docker_image:
+    name: quay.io/ansible/python-builder
+    source: build
+    build:
+      path: "{{ BASE_DIR }}/python-builder"
+      dockerfile: Containerfile
+  vars:
+    ansible_python_interpreter: /home/ubuntu/venv/awx-build/bin/python
