@@ -25,16 +25,17 @@
     params:
       IMG: zakihmkc/awx-operator:0.17.0
 
+- name: login docker hub
+  community.docker.docker_login:
+    username: "{{ dockerhub_username }}"
+    password: "{{ dockerhub_password }}"
+
 - name: push container image
   community.docker.docker_image:
     name: zakihmkc/awx-operator:0.17.0
     repository: zakihmkc/awx-operator:0.17.0
     push: true
     source: local
-  vars:
-    ansible_python_interpreter: /home/ubuntu/venv/awx-build/bin/python
-  # environment:
-  #   PYTHONPATH: /home/ubuntu/venv/awx-build/lib/python3.9/site-packages/
 
 - name: deploy awx-operator
   community.general.make:
