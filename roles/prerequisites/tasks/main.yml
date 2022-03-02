@@ -7,6 +7,13 @@
     update_cache: true
   become: true
 
+- name: alternatives python
+  community.general.alternatives:
+    name: python
+    link: /usr/bin/python
+    path: /usr/bin/python3
+  become: true
+
 - import_tasks: _install_docker.yml
   become: true
 
