@@ -3,8 +3,14 @@
   ansible.builtin.apt:
     name:
       - make
+      - python3-pip
     update_cache: true
   become: true
 
 - import_tasks: _install_docker.yml
   become: true
+
+- name: install pip packages
+  ansible.builtin.pip:
+    name:
+      - docker==5.0.3
