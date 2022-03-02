@@ -18,5 +18,3 @@
     build:
       path: "{{ BASE_DIR }}/python-builder"
       dockerfile: Containerfile
-  vars:
-    ansible_python_interpreter: /home/ubuntu/venv/awx-build/bin/python
