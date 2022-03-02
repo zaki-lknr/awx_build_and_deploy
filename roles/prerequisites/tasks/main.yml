@@ -10,6 +10,9 @@
 - import_tasks: _install_docker.yml
   become: true
 
+- import_tasks: _install_k3s.yml
+  become: true
+
 - name: install pip packages
   ansible.builtin.pip:
     name:
