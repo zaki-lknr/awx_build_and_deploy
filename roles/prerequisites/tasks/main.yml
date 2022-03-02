@@ -1,0 +1,10 @@
+---
+- name: install packages
+  ansible.builtin.apt:
+    name:
+      - make
+    update_cache: true
+  become: true
+
+- import_tasks: _install_docker.yml
+  become: true
