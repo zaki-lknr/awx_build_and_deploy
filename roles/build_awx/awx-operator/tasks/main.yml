@@ -10,6 +10,7 @@
     repo: https://github.com/ansible/awx-operator.git
     dest: "{{ BASE_DIR }}/awx-operator"
     version: 0.17.0
+    force: true # デプロイ時にkustomizeの更新があり再cloneできないため
 
 # - name: build awx-operator
 #   ansible.builtin.shell:
