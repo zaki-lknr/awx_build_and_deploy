@@ -5,6 +5,7 @@
       - make
       - python3-pip
       - tox
+      - ansible
     update_cache: true
   become: true
 

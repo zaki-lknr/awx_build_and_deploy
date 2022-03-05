@@ -19,10 +19,12 @@
 #       awx_image
 
 - name: build awx
-  ansible.builtin.shell:
-    cmd: |
-      . /home/ubuntu/venv/awx-build/bin/activate
-      ansible-playbook build.yml
+  # ansible.builtin.shell:
+  #   cmd: |
+  #     . /home/ubuntu/venv/awx-build/bin/activate
+  #     ansible-playbook build.yml
+  ansible.builtin.command:
+    cmd: ansible-playbook build.yml
     chdir: "{{ BASE_DIR }}/awx/tools/ansible"
   # vars:
   #   ansible_python_interpreter: /home/ubuntu/venv/awx-build/bin/python
