@@ -1,0 +1,7 @@
+---
+- name: deploy awx-operator
+  community.general.make:
+    chdir: "{{ BASE_DIR }}/awx-operator"
+    target: deploy
+    params:
+      IMG: zakihmkc/awx-operator:0.17.0
