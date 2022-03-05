@@ -4,6 +4,7 @@
     name:
       - make
       - python3-pip
+      - tox
     update_cache: true
   become: true
 
@@ -24,3 +25,4 @@
   ansible.builtin.pip:
     name:
       - docker==5.0.3
+      # - tox==3.24.5
