@@ -11,12 +11,15 @@
     dest: "{{ BASE_DIR }}/awx"
     version: 20.0.0
 
-# - name: create inventory
-#   ansible.builtin.file:
-#     content: |
-#       [all:vars]
-#       push=true
-#       awx_image
+- name: create inventory for push image
+  ansible.builtin.copy:
+    content: |
+      [all:vars]
+      push=1
+      registry=docker.io
+      awx_image=zakihmkc/awx
+      #awx_image_tag=
+    dest: "{{ BASE_DIR }}/awx-inventory.ini"
 
 - name: build awx
   # ansible.builtin.shell:
@@ -24,8 +27,10 @@
   #     . /home/ubuntu/venv/awx-build/bin/activate
   #     ansible-playbook build.yml
   ansible.builtin.command:
-    cmd: ansible-playbook build.yml
+    cmd: "ansible-playbook build.yml -i ../../../awx-inventory.ini -v"
     chdir: "{{ BASE_DIR }}/awx/tools/ansible"
+    # inventoryの指定は内蔵push処理を起動するため
+    # inventoryのファイル位置はchdir基準で指定する
   # vars:
   #   ansible_python_interpreter: /home/ubuntu/venv/awx-build/bin/python
   # become: false
