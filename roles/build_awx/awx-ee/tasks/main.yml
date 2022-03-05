@@ -12,11 +12,10 @@
     version: 0.6.0
 
 - name: build awx-ee
-  ansible.builtin.shell:
-    cmd: |
-      . /home/ubuntu/venv/awx-build/bin/activate
-      tox -edocker
+  ansible.builtin.command:
+    cmd: tox -edocker
     chdir: "{{ BASE_DIR }}/awx-ee"
+  become: true # ないと"ModuleNotFoundError: No module named 'virtualenv.seed.via_app_data'"で動かないため回避策
 
 - name: push container image
   community.docker.docker_image:
@@ -25,5 +24,5 @@
     push: true
     source: local
     force_tag: true
-  vars:
-    ansible_python_interpreter: /home/ubuntu/venv/awx-build/bin/python
+  # vars:
+  #   ansible_python_interpreter: /home/ubuntu/venv/awx-build/bin/python
