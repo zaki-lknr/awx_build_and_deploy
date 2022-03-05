@@ -1,10 +1,16 @@
 ---
 - hosts: all
-  gather_facts: false
+  gather_facts: true
+  gather_subset:
+    - min
 
   roles:
+    - prerequisites
     - build_awx/awx-operator
-    # - build_awx/awx
-    # - build_awx/awx-ee
-    # - build_awx/ansible-runner
-    # - build_awx/receptor
+    - build_awx/receptor
+    - build_awx/python-base
+    - build_awx/python-builder
+    - build_awx/ansible-runner
+    - build_awx/ansible-builder
+    - build_awx/awx-ee
+    - build_awx/awx
