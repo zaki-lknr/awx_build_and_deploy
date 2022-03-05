@@ -1,0 +1,24 @@
+---
+- name: deploy awx-demo
+  kubernetes.core.k8s:
+    state: present
+    kubeconfig: /etc/rancher/k3s/k3s.yaml
+    resource_definition:
+      apiVersion: awx.ansible.com/v1beta1
+      kind: AWX
+      metadata:
+        name: awx-demo
+        namespace: awx
+      spec:
+        service_type: nodeport
+        image: zakihmkc/awx
+        image_version: 20.0.0
+        image_pull_policy: Always
+        ee_images:
+          - name: awx-ee-arm64
+            image: zakihmkc/awx-ee:0.6.0
+          - name: AWX EE (latest)
+            image: zakihmkc/awx-ee:0.6.0
+        control_plane_ee_image: zakihmkc/awx-ee:0.6.0
+        ingress_type: ingress
+        hostname: awx03.jp-z.jp
