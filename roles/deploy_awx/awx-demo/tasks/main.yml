@@ -1,4 +1,37 @@
 ---
+- name: create namespace
+  kubernetes.core.k8s:
+    kubeconfig: /etc/rancher/k3s/k3s.yaml
+    state: present
+    name: awx
+    kind: Namespace
+    api_version: v1
+
+- name: create ingress resource
+  kubernetes.core.k8s:
+    state: present
+    kubeconfig: /etc/rancher/k3s/k3s.yaml
+    resource_definition:
+      apiVersion: "networking.k8s.io/v1"
+      kind: Ingress
+      metadata:
+        name: awx-ingress
+        namespace: awx
+        # annotations:
+        #   kubernetes.io/ingress.class: traefik-lb
+      spec:
+        ingressClassName: traefik-lb
+        rules:
+        - host: awx03.jp-z.jp
+          http:
+            paths:
+            - pathType: Prefix
+              path: /
+              backend:
+                service:
+                  name: awx-demo-service
+                  port:
+                    number: 80
 - name: deploy awx-demo
   kubernetes.core.k8s:
     state: present
