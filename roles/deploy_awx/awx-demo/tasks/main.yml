@@ -55,3 +55,24 @@
         control_plane_ee_image: zakihmkc/awx-ee:0.6.0
         ingress_type: ingress
         hostname: awx03.jp-z.jp
+        # web_resource_requirements:
+        #   requests:
+        #     cpu: 400m
+        #     memory: 2Gi
+        #   limits:
+        #     cpu: 400m
+        #     memory: 2Gi
+        # task_resource_requirements:
+        #   requests:
+        #     cpu: 400m
+        #     memory: 1Gi
+        #   limits:
+        #     cpu: 400m
+        #     memory: 1Gi
+        # ee_resource_requirements:
+        #   requests:
+        #     cpu: 400m
+        #     memory: 1Gi
+        #   limits:
+        #     cpu: 400m
+        #     memory: 1Gi
