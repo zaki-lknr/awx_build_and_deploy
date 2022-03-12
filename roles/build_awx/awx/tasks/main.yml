@@ -9,7 +9,7 @@
   ansible.builtin.git:
     repo: https://github.com/ansible/awx.git
     dest: "{{ BASE_DIR }}/awx"
-    version: 20.0.0
+    version: "{{ awx_version }}"
 
 - name: create inventory for push image
   ansible.builtin.copy:

@@ -1,3 +1,2 @@
 ---
-BASE_DIR: ./tmp
 awx_version: 20.0.0
