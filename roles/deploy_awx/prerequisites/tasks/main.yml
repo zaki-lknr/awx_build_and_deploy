@@ -1,0 +1,18 @@
+---
+- name: install packages
+  ansible.builtin.apt:
+    name:
+      - make
+      - python3-pip
+      # - tox
+      # - ansible
+    update_cache: true
+  become: true
+
+- import_tasks: _install_k3s.yml
+  become: true
+
+- name: install pip packages
+  ansible.builtin.pip:
+    name:
+      - openshift==0.13.1

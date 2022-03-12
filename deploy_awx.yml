@@ -5,6 +5,6 @@
     - min
 
   roles:
-    # - prerequisites
+    - deploy_awx/prerequisites
     - deploy_awx/awx-operator
     - deploy_awx/awx-demo
