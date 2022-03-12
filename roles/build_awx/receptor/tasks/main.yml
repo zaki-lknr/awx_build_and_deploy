@@ -10,7 +10,7 @@
     repo: https://github.com/ansible/receptor.git
     dest: "{{ BASE_DIR }}/receptor"
     # version: release_1.0
-    version: 1.0.0a2
+    version: "{{ receptor_version }}"
 
 - name: build image
   community.general.make:
@@ -18,4 +18,4 @@
     target: container
     params:
       CONTAINERCMD: docker
-      TAG: quay.io/project-receptor/receptor:1.0.0a2
+      TAG: "quay.io/project-receptor/receptor:{{ receptor_version }}"

@@ -9,7 +9,7 @@
   ansible.builtin.git:
     repo: https://github.com/ansible/python-builder-image.git
     dest: "{{ BASE_DIR }}/python-builder"
-    version: main
+    version: "{{ python_builder_version }}"
 
 - name: build image
   community.docker.docker_image:

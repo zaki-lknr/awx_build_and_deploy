@@ -1,2 +1,3 @@
 ---
 BASE_DIR: ./tmp
+python_base_version: main
