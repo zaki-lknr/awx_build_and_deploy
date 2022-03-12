@@ -9,7 +9,7 @@
   ansible.builtin.git:
     repo: https://github.com/ansible/awx-operator.git
     dest: "{{ BASE_DIR }}/awx-operator"
-    version: 0.17.0
+    version: "{{ operator_version }}"
     force: true # デプロイ時にkustomizeの更新があり再cloneできないため
 
 # - name: build awx-operator
@@ -24,7 +24,7 @@
     chdir: "{{ BASE_DIR }}/awx-operator"
     target: docker-build
     params:
-      IMG: zakihmkc/awx-operator:0.17.0
+      IMG: "zakihmkc/awx-operator:{{ operator_version }}"
 
 - name: login docker hub
   community.docker.docker_login:
@@ -33,8 +33,8 @@
 
 - name: push container image
   community.docker.docker_image:
-    name: zakihmkc/awx-operator:0.17.0
-    repository: zakihmkc/awx-operator:0.17.0
+    name: "zakihmkc/awx-operator:{{ operator_version }}"
+    repository: "zakihmkc/awx-operator:{{ operator_version }}"
     push: true
     source: local
 
