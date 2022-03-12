@@ -1,5 +1,5 @@
 ---
-- hosts: all
+- hosts: build
   gather_facts: true
   gather_subset:
     - min
@@ -14,3 +14,13 @@
     - build_awx/ansible-builder
     - build_awx/awx-ee
     - build_awx/awx
+
+- hosts: deploy
+  gather_facts: true
+  gather_subset:
+    - min
+
+  roles:
+    - deploy_awx/prerequisites
+    - deploy_awx/awx-operator
+    - deploy_awx/awx-demo
