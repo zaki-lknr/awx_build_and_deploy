@@ -49,10 +49,10 @@
         image_pull_policy: Always
         ee_images:
           - name: awx-ee-arm64
-            image: zakihmkc/awx-ee:0.6.0
+            image: "zakihmkc/awx-ee:{{ awx_ee_version }}"
           - name: AWX EE (latest)
-            image: zakihmkc/awx-ee:0.6.0
-        control_plane_ee_image: zakihmkc/awx-ee:0.6.0
+            image: "zakihmkc/awx-ee:{{ awx_ee_version }}"
+        control_plane_ee_image: "zakihmkc/awx-ee:{{ awx_ee_version }}"
         ingress_type: ingress
         hostname: awx03.jp-z.jp
         # web_resource_requirements:

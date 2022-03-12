@@ -9,7 +9,7 @@
   ansible.builtin.git:
     repo: https://github.com/ansible/awx-ee.git
     dest: "{{ BASE_DIR }}/awx-ee"
-    version: 0.6.0
+    version: "{{ awx_ee_version }}"
 
 - name: build awx-ee
   ansible.builtin.command:
@@ -20,7 +20,7 @@
 - name: push container image
   community.docker.docker_image:
     name: quay.io/ansible/awx-ee
-    repository: zakihmkc/awx-ee:0.6.0
+    repository: "zakihmkc/awx-ee:{{ awx_ee_version }}"
     push: true
     source: local
     force_tag: true
