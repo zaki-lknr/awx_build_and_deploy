@@ -1,2 +1,3 @@
 ---
 BASE_DIR: ./tmp
+ansible_builder_version: 1.0.1

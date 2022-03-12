@@ -9,7 +9,7 @@
   ansible.builtin.git:
     repo: https://github.com/ansible/ansible-runner.git
     dest: "{{ BASE_DIR }}/ansible-runner"
-    version: 2.1.1
+    version: "{{ ansible_runner_version }}"
 
 - name: build image
   community.general.make:

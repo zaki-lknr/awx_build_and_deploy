@@ -9,7 +9,7 @@
   ansible.builtin.git:
     repo: https://github.com/ansible/ansible-builder.git
     dest: "{{ BASE_DIR }}/ansible-builder"
-    version: 1.0.1
+    version: "{{ ansible_builder_version }}"
 
 - name: build image
   community.general.make:
