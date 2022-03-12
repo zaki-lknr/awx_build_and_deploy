@@ -15,16 +15,17 @@
     link: /usr/bin/python
     path: /usr/bin/python3
   become: true
+  # for build receptor
 
 - import_tasks: _install_docker.yml
   become: true
 
-- import_tasks: _install_k3s.yml
-  become: true
+# - import_tasks: _install_k3s.yml
+#   become: true
 
 - name: install pip packages
   ansible.builtin.pip:
     name:
       - docker==5.0.3
-      - openshift==0.13.1
+      # - openshift==0.13.1
       # - tox==3.24.5

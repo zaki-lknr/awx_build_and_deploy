@@ -5,7 +5,7 @@
     - min
 
   roles:
-    - prerequisites
+    - build_awx/prerequisites
     - build_awx/awx-operator
     - build_awx/receptor
     - build_awx/python-base
