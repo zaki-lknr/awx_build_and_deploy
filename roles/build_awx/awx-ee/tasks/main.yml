@@ -20,7 +20,7 @@
 - name: push container image
   community.docker.docker_image:
     name: quay.io/ansible/awx-ee
-    repository: "zakihmkc/awx-ee:{{ awx_ee_version }}"
+    repository: "{{ awx_ee_repository }}:{{ awx_ee_version }}"
     push: true
     source: local
     force_tag: true

@@ -4,4 +4,4 @@
     chdir: "{{ BASE_DIR }}/awx-operator"
     target: deploy
     params:
-      IMG: "zakihmkc/awx-operator:{{ operator_version }}"
+      IMG: "{{ operator_image_repository }}:{{ operator_version }}"

@@ -17,9 +17,10 @@
       [all:vars]
       push=1
       registry=docker.io
-      awx_image=zakihmkc/awx
+      awx_image="{{ awx_image_repository }}"
       #awx_image_tag=
     dest: "{{ BASE_DIR }}/awx-inventory.ini"
+    # todo:registry/repository形式になっている
 
 - name: build awx
   # ansible.builtin.shell:
