@@ -11,27 +11,18 @@
     dest: "{{ BASE_DIR }}/awx"
     version: "{{ awx_version }}"
 
-- name: create inventory for push image
-  ansible.builtin.copy:
-    content: |
-      [all:vars]
-      push=1
-      registry=docker.io
-      awx_image="{{ awx_image_repository }}"
-      #awx_image_tag=
-    dest: "{{ BASE_DIR }}/awx-inventory.ini"
-    # todo:registry/repository形式になっている
-
 - name: build awx
   # ansible.builtin.shell:
   #   cmd: |
   #     . /home/ubuntu/venv/awx-build/bin/activate
   #     ansible-playbook build.yml
   ansible.builtin.command:
-    cmd: "ansible-playbook build.yml -i ../../../awx-inventory.ini -v"
+    cmd: "ansible-playbook build.yml -v"
     chdir: "{{ BASE_DIR }}/awx/tools/ansible"
-    # inventoryの指定は内蔵push処理を起動するため
-    # inventoryのファイル位置はchdir基準で指定する
-  # vars:
-  #   ansible_python_interpreter: /home/ubuntu/venv/awx-build/bin/python
-  # become: false
+
+- name: push container image
+  community.docker.docker_image:
+    name: "ansible/awx:{{ awx_version }}"
+    repository: "{{ awx_image_repository }}:{{ awx_version }}"
+    push: true
+    source: local
