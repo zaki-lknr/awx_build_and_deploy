@@ -3,3 +3,4 @@ awx_version: 20.0.0
 awx_ee_version: 0.6.0
 awx_image_repository: zakihmkc/awx
 awx_ee_repository: zakihmkc/awx-ee
+awx_service_fqdn: awx.example.org

@@ -22,7 +22,7 @@
       spec:
         ingressClassName: traefik-lb
         rules:
-        - host: awx03.jp-z.jp
+        - host: "{{ awx_service_fqdn }}"
           http:
             paths:
             - pathType: Prefix
@@ -54,7 +54,7 @@
             image: "{{ awx_ee_repository }}:{{ awx_ee_version }}"
         control_plane_ee_image: "{{ awx_ee_repository }}:{{ awx_ee_version }}"
         ingress_type: ingress
-        hostname: awx03.jp-z.jp
+        hostname: "{{ awx_service_fqdn }}"
         # web_resource_requirements:
         #   requests:
         #     cpu: 400m
