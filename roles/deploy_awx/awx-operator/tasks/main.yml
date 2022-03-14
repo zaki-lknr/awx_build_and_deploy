@@ -5,3 +5,5 @@
     target: deploy
     params:
       IMG: "{{ operator_image_repository }}:{{ operator_version }}"
+  environment:
+    NAMESPACE: "{{ awx_namespace }}"
