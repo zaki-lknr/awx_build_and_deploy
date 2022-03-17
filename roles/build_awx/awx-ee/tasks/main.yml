@@ -17,12 +17,20 @@
     chdir: "{{ BASE_DIR }}/awx-ee"
   become: true # ないと"ModuleNotFoundError: No module named 'virtualenv.seed.via_app_data'"で動かないため回避策
 
-- name: push container image
+- name: create custome Dockerfile
+  ansible.builtin.copy:
+    dest: "{{ BASE_DIR }}/Dockerfile"
+    content: |
+      FROM quay.io/ansible/awx-ee
+      USER 1000
+  # ジョブテンプレートで.git以下のファイルでPermissionErrorになる動作の回避のためユーザーIDを指定したコンテナを作成する
+
+- name: build custom runner image and push
   community.docker.docker_image:
-    name: quay.io/ansible/awx-ee
+    name: "{{ awx_ee_repository }}:{{ awx_ee_version }}"
+    source: build
+    build:
+      path: "{{ BASE_DIR }}"
     repository: "{{ awx_ee_repository }}:{{ awx_ee_version }}"
     push: true
-    source: local
     force_tag: true
-  # vars:
-  #   ansible_python_interpreter: /home/ubuntu/venv/awx-build/bin/python
