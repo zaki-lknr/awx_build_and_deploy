@@ -32,22 +32,22 @@
         hostname: "{{ awx_service_fqdn }}"
         # web_resource_requirements:
         #   requests:
-        #     cpu: 400m
-        #     memory: 2Gi
+        #     cpu: "{{ web_resource_requests_cpu }}"
+        #     memory: "{{ web_resource_requests_mem }}"
         #   limits:
-        #     cpu: 400m
-        #     memory: 2Gi
+        #     cpu: "{{ web_resource_limits_cpu }}"
+        #     memory: "{{ web_resource_limits_mem }}"
         # task_resource_requirements:
         #   requests:
-        #     cpu: 400m
-        #     memory: 1Gi
+        #     cpu: "{{ task_resource_requests_cpu }}"
+        #     memory: "{{ task_resource_requests_mem }}"
         #   limits:
-        #     cpu: 400m
-        #     memory: 1Gi
+        #     cpu: "{{ task_resource_limits_cpu }}"
+        #     memory: "{{ task_resource_limits_mem }}"
         # ee_resource_requirements:
         #   requests:
-        #     cpu: 400m
-        #     memory: 1Gi
+        #     cpu: "{{ ee_resource_requests_cpu }}"
+        #     memory: "{{ ee_resource_requests_mem }}"
         #   limits:
-        #     cpu: 400m
-        #     memory: 1Gi
+        #     cpu: "{{ ee_resource_limits_cpu }}"
+        #     memory: "{{ ee_resource_limits_mem }}"
