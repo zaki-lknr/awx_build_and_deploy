@@ -1,0 +1,76 @@
+---
+apiVersion: awx.ansible.com/v1beta1
+kind: AWX
+metadata:
+  name: awx-demo
+  namespace: "{{ awx_namespace }}"
+spec:
+  service_type: nodeport
+  image: "{{ awx_image_repository }}"
+  image_version: "{{ awx_version }}"
+  image_pull_policy: Always
+  ee_images:
+    - name: awx-ee-arm64
+      image: "{{ awx_ee_repository }}:{{ awx_ee_version }}"
+    - name: AWX EE (latest)
+      image: "{{ awx_ee_repository }}:{{ awx_ee_version }}"
+  control_plane_ee_image: "{{ awx_ee_repository }}:{{ awx_ee_version }}"
+  ingress_type: ingress
+  hostname: "{{ awx_service_fqdn }}"
+  web_resource_requirements:
+{% if web_resource_requests_cpu is defined or web_resource_requests_mem is defined %}
+    requests:
+{% if web_resource_requests_cpu is defined %}
+      cpu: "{{ web_resource_requests_cpu }}"
+{% endif %}
+{% if web_resource_requests_mem is defined %}
+      memory: "{{ web_resource_requests_mem }}"
+{% endif %}
+{% endif %}
+{% if web_resource_limits_cpu is defined or web_resource_limits_mem is defined %}
+    limits:
+{% if web_resource_limits_cpu is defined %}
+      cpu: "{{ web_resource_limits_cpu }}"
+{% endif %}
+{% if web_resource_limits_mem is defined %}
+      memory: "{{ web_resource_limits_mem }}"
+{% endif %}
+{% endif %}
+  task_resource_requirements:
+{% if task_resource_requests_cpu is defined or task_resource_requests_mem is defined %}
+    requests:
+{% if task_resource_requests_cpu is defined %}
+      cpu: "{{ task_resource_requests_cpu }}"
+{% endif %}
+{% if task_resource_requests_mem is defined %}
+      memory: "{{ task_resource_requests_mem }}"
+{% endif %}
+{% endif %}
+{% if task_resource_limits_cpu is defined or task_resource_limits_mem is defined %}
+    limits:
+{% if task_resource_limits_cpu is defined %}
+      cpu: "{{ task_resource_limits_cpu }}"
+{% endif %}
+{% if task_resource_limits_mem is defined %}
+      memory: "{{ task_resource_limits_mem }}"
+{% endif %}
+{% endif %}
+  ee_resource_requirements:
+{% if ee_resource_requests_cpu is defined or ee_resource_requests_mem is defined %}
+    requests:
+{% if ee_resource_requests_cpu is defined %}
+      cpu: "{{ ee_resource_requests_cpu }}"
+{% endif %}
+{% if ee_resource_requests_mem is defined %}
+      memory: "{{ ee_resource_requests_mem }}"
+{% endif %}
+{% endif %}
+{% if ee_resource_limits_cpu is defined or ee_resource_limits_mem is defined %}
+    limits:
+{% if ee_resource_limits_cpu is defined %}
+      cpu: "{{ ee_resource_limits_cpu }}"
+{% endif %}
+{% if ee_resource_limits_mem is defined %}
+      memory: "{{ ee_resource_limits_mem }}"
+{% endif %}
+{% endif %}

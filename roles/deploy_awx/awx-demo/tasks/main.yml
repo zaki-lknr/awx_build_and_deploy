@@ -11,43 +11,4 @@
   kubernetes.core.k8s:
     state: present
     kubeconfig: /etc/rancher/k3s/k3s.yaml
-    resource_definition:
-      apiVersion: awx.ansible.com/v1beta1
-      kind: AWX
-      metadata:
-        name: awx-demo
-        namespace: "{{ awx_namespace }}"
-      spec:
-        service_type: nodeport
-        image: "{{ awx_image_repository }}"
-        image_version: "{{ awx_version }}"
-        image_pull_policy: Always
-        ee_images:
-          - name: awx-ee-arm64
-            image: "{{ awx_ee_repository }}:{{ awx_ee_version }}"
-          - name: AWX EE (latest)
-            image: "{{ awx_ee_repository }}:{{ awx_ee_version }}"
-        control_plane_ee_image: "{{ awx_ee_repository }}:{{ awx_ee_version }}"
-        ingress_type: ingress
-        hostname: "{{ awx_service_fqdn }}"
-        # web_resource_requirements:
-        #   requests:
-        #     cpu: "{{ web_resource_requests_cpu }}"
-        #     memory: "{{ web_resource_requests_mem }}"
-        #   limits:
-        #     cpu: "{{ web_resource_limits_cpu }}"
-        #     memory: "{{ web_resource_limits_mem }}"
-        # task_resource_requirements:
-        #   requests:
-        #     cpu: "{{ task_resource_requests_cpu }}"
-        #     memory: "{{ task_resource_requests_mem }}"
-        #   limits:
-        #     cpu: "{{ task_resource_limits_cpu }}"
-        #     memory: "{{ task_resource_limits_mem }}"
-        # ee_resource_requirements:
-        #   requests:
-        #     cpu: "{{ ee_resource_requests_cpu }}"
-        #     memory: "{{ ee_resource_requests_mem }}"
-        #   limits:
-        #     cpu: "{{ ee_resource_limits_cpu }}"
-        #     memory: "{{ ee_resource_limits_mem }}"
+    template: awx-demo.yaml.j2
