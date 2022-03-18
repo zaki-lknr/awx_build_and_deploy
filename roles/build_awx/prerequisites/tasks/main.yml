@@ -29,3 +29,9 @@
       - docker==5.0.3
       # - openshift==0.13.1
       # - tox==3.24.5
+
+- name: login container registry
+  community.docker.docker_login:
+    username: "{{ registry_username }}"
+    password: "{{ registry_password }}"
+    registry_url: "{{ registry_url | default(omit) }}"

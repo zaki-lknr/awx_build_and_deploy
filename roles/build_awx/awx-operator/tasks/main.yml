@@ -26,12 +26,6 @@
     params:
       IMG: "{{ operator_image_repository }}:{{ operator_version }}"
 
-- name: login container registry
-  community.docker.docker_login:
-    username: "{{ registry_username }}"
-    password: "{{ registry_password }}"
-    registry_url: "{{ registry_url | default(omit) }}"
-
 - name: push container image
   community.docker.docker_image:
     name: "{{ operator_image_repository }}:{{ operator_version }}"
