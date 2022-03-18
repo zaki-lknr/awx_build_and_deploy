@@ -35,3 +35,6 @@
     username: "{{ registry_username }}"
     password: "{{ registry_password }}"
     registry_url: "{{ registry_url | default(omit) }}"
+  when:
+    - registry_username is defined
+    - registry_password is defined
