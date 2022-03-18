@@ -1,5 +1,10 @@
 ---
 # awx-operator
+- name: define repository url
+  set_fact:
+    operator_image_repository: "{{ ((registry_url is defined) | ternary(registry_url, ''), registry_username, 'awx-operator') | path_join }}"
+  when: registry_username is defined
+
 - name: create working directory
   ansible.builtin.file:
     state: directory
