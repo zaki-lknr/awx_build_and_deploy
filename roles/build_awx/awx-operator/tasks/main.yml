@@ -26,10 +26,10 @@
     params:
       IMG: "{{ operator_image_repository }}:{{ operator_version }}"
 
-- name: login docker hub
+- name: login container registry
   community.docker.docker_login:
-    username: "{{ dockerhub_username }}"
-    password: "{{ dockerhub_password }}"
+    username: "{{ registry_username }}"
+    password: "{{ registry_password }}"
 
 - name: push container image
   community.docker.docker_image:
