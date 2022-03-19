@@ -27,10 +27,10 @@
 
 - name: build custom runner image and push
   community.docker.docker_image:
-    name: "{{ awx_ee_repository }}:{{ awx_ee_version }}"
+    name: "{{ awx_ee_image_repository }}:{{ awx_ee_version }}"
     source: build
     build:
       path: "{{ BASE_DIR }}"
-    repository: "{{ awx_ee_repository }}:{{ awx_ee_version }}"
+    repository: "{{ awx_ee_image_repository }}:{{ awx_ee_version }}"
     push: true
     force_tag: true

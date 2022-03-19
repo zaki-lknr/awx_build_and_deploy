@@ -51,5 +51,5 @@
 
 - name: define repository url
   set_fact:
-    awx_ee_repository: "{{ ((registry_url is defined) | ternary(registry_url, ''), registry_username, 'awx-ee') | path_join }}"
-  when: awx_ee_repository is not defined
+    awx_ee_image_repository: "{{ ((registry_url is defined) | ternary(registry_url, ''), registry_username, 'awx-ee') | path_join }}"
+  when: awx_ee_image_repository is not defined

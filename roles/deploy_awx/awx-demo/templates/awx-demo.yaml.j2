@@ -11,10 +11,10 @@ spec:
   image_pull_policy: Always
   ee_images:
     - name: awx-ee-arm64
-      image: "{{ awx_ee_repository }}:{{ awx_ee_version }}"
+      image: "{{ awx_ee_image_repository }}:{{ awx_ee_version }}"
     - name: AWX EE (latest)
-      image: "{{ awx_ee_repository }}:{{ awx_ee_version }}"
-  control_plane_ee_image: "{{ awx_ee_repository }}:{{ awx_ee_version }}"
+      image: "{{ awx_ee_image_repository }}:{{ awx_ee_version }}"
+  control_plane_ee_image: "{{ awx_ee_image_repository }}:{{ awx_ee_version }}"
   ingress_type: ingress
   hostname: "{{ awx_service_fqdn }}"
   web_resource_requirements:
