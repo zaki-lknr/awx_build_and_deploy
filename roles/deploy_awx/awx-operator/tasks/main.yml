@@ -1,4 +1,16 @@
 ---
+- name: create working directory
+  ansible.builtin.file:
+    state: directory
+    path: "{{ BASE_DIR }}"
+
+- name: clone repository
+  ansible.builtin.git:
+    repo: https://github.com/ansible/awx-operator.git
+    dest: "{{ BASE_DIR }}/awx-operator"
+    version: "{{ operator_version }}"
+    force: true # デプロイ時にkustomizeの更新があり再cloneできないため
+
 - name: deploy awx-operator
   community.general.make:
     chdir: "{{ BASE_DIR }}/awx-operator"
