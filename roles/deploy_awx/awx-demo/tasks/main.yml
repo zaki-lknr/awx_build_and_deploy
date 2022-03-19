@@ -1,10 +1,4 @@
 ---
-- name: define repository url
-  set_fact:
-    awx_image_repository: "{{ ((registry_url is defined) | ternary(registry_url, ''), registry_username, 'awx') | path_join }}"
-    awx_ee_repository: "{{ ((registry_url is defined) | ternary(registry_url, ''), registry_username, 'awx-ee') | path_join }}"
-  when: registry_username is defined
-
 - name: create namespace
   kubernetes.core.k8s:
     kubeconfig: /etc/rancher/k3s/k3s.yaml

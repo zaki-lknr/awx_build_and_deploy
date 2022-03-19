@@ -16,3 +16,18 @@
   ansible.builtin.pip:
     name:
       - openshift==0.13.1
+
+- name: define repository url
+  set_fact:
+    operator_image_repository: "{{ ((registry_url is defined) | ternary(registry_url, ''), registry_username, 'awx-operator') | path_join }}"
+  when: operator_image_repository is not defined
+
+- name: define repository url
+  set_fact:
+    awx_image_repository: "{{ ((registry_url is defined) | ternary(registry_url, ''), registry_username, 'awx') | path_join }}"
+  when: awx_image_repository is not defined
+
+- name: define repository url
+  set_fact:
+    awx_ee_repository: "{{ ((registry_url is defined) | ternary(registry_url, ''), registry_username, 'awx-ee') | path_join }}"
+  when: awx_ee_repository is not defined
