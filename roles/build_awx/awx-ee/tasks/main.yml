@@ -1,5 +1,10 @@
 ---
 # awx-ee
+- name: define repository url
+  set_fact:
+    awx_ee_repository: "{{ ((registry_url is defined) | ternary(registry_url, ''), registry_username, 'awx-ee') | path_join }}"
+  when: registry_username is defined
+
 - name: create working directory
   ansible.builtin.file:
     state: directory
