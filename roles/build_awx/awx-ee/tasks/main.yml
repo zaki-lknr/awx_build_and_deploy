@@ -10,6 +10,7 @@
     repo: https://github.com/ansible/awx-ee.git
     dest: "{{ BASE_DIR }}/awx-ee"
     version: "{{ awx_ee_version }}"
+    force: true # ビルドでContainerfileに変更があり再実行時にcloneに失敗するため
 
 - name: build awx-ee
   ansible.builtin.command:
