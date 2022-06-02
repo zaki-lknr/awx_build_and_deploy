@@ -18,4 +18,4 @@
     target: container
     params:
       CONTAINERCMD: docker
-      TAG: "quay.io/project-receptor/receptor:{{ receptor_version }}"
+      # TAG: "quay.io/project-receptor/receptor:{{ receptor_version }}" # 不要になった

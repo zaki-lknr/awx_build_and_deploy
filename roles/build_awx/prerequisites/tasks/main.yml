@@ -27,6 +27,7 @@
   ansible.builtin.pip:
     name:
       - docker==5.0.3
+      - build==0.8.0  # recepter v1.2.3で必要
       # - openshift==0.13.1
       # - tox==3.24.5
 
