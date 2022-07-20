@@ -23,6 +23,17 @@
   tags:
     - edit_containerfile
 
+- name: fix receptor image repository url
+  ansible.builtin.replace:
+    path: "{{ item }}"
+    regexp: 'quay\.io/project-receptor/receptor'
+    replace: "quay.io/ansible/receptor"
+  loop:
+    - "{{ BASE_DIR }}/awx-ee/Containerfile"
+    - "{{ BASE_DIR }}/awx-ee/execution-environment.yml"
+  tags:
+    - edit_containerfile
+
 - name: build awx-ee
   ansible.builtin.command:
     cmd: tox -edocker
@@ -46,3 +57,4 @@
     repository: "{{ awx_ee_image_repository }}:{{ awx_ee_version }}"
     push: true
     force_tag: true
+    force_source: true  ## runner/builderに更新があった場合…

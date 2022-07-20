@@ -19,4 +19,3 @@
     params:
       CONTAINERCMD: docker
       # TAG: "quay.io/project-receptor/receptor:{{ receptor_version }}" # 不要になった
-      REPO: quay.io/project-receptor/receptor  # 古いverに合わせる暫定対処 todo:awx-eeを新しいverに合わせよう
