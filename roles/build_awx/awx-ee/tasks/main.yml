@@ -12,6 +12,17 @@
     version: "{{ awx_ee_version }}"
     force: true # ビルドでContainerfileに変更があり再実行時にcloneに失敗するため
 
+- name: update Containerfile for receptor version
+  ansible.builtin.replace:
+    path: "{{ item }}"
+    regexp: '(?<=receptor:)[0-9a-z\.]+'
+    replace: "{{ receptor_version }}"
+  loop:
+    - "{{ BASE_DIR }}/awx-ee/Containerfile"
+    - "{{ BASE_DIR }}/awx-ee/execution-environment.yml"
+  tags:
+    - edit_containerfile
+
 - name: build awx-ee
   ansible.builtin.command:
     cmd: tox -edocker
