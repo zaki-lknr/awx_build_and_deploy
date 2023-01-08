@@ -31,6 +31,7 @@
       - build==0.8.0  # recepter v1.2.3で必要
       # - openshift==0.13.1
       # - tox==3.24.5
+  become: true
 
 - name: login container registry
   community.docker.docker_login:

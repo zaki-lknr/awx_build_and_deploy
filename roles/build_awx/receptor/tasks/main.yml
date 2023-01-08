@@ -11,6 +11,7 @@
     dest: "{{ BASE_DIR }}/receptor"
     # version: release_1.0
     version: "{{ receptor_version }}"
+  become: true
 
 - name: build image
   community.general.make:
@@ -19,3 +20,4 @@
     params:
       CONTAINERCMD: docker
       # TAG: "quay.io/project-receptor/receptor:{{ receptor_version }}" # 不要になった
+  become: true
