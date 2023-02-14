@@ -9,7 +9,7 @@
   ansible.builtin.git:
     repo: https://github.com/ansible/awx-ee.git
     dest: "{{ BASE_DIR }}/awx-ee"
-    version: "{{ awx_ee_version }}"
+    version: "{{ awx_ee_src_version }}"
     force: true # ビルドでContainerfileに変更があり再実行時にcloneに失敗するため
 
 - name: update Containerfile for receptor version
