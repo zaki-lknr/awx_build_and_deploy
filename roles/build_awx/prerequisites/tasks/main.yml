@@ -4,8 +4,11 @@
     name:
       - make
       - python3-pip
+      - python3-venv
       - tox
       - ansible
+      # - python3.9 # awx 21.10.2で必要(3.8はNG)
+      # - pythnon3-apt
     update_cache: true
   become: true
 
@@ -17,6 +20,14 @@
   become: true
   # for build receptor
 
+# - name: alternatives python 3.9
+#   community.general.alternatives:
+#     name: python3
+#     link: /usr/bin/python3
+#     path: /usr/bin/python3.9
+#   become: true
+#   # for build awx 21.10.2 with Python 3.9
+
 - import_tasks: _install_docker.yml
   become: true
 
@@ -27,8 +38,11 @@
   ansible.builtin.pip:
     name:
       - docker==5.0.3
+      - build==0.8.0  # recepter v1.2.3で必要
       # - openshift==0.13.1
       # - tox==3.24.5
+      # - setuptools_scm==7.1.0  # awxビルド時のブランチ名取得でPython 3.9だと必要。ただしブランチ名から取得するバージョンはパラメタで与えられるので使わない
+  become: true
 
 - name: login container registry
   community.docker.docker_login:

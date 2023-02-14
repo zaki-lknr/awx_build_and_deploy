@@ -1,3 +1,4 @@
 ---
 BASE_DIR: ./tmp
-operator_version: 0.17.0
+operator_version: 1.2.0
+awx_ee_version: 21.12.0

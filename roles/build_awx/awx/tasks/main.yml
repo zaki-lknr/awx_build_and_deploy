@@ -17,8 +17,9 @@
   #     . /home/ubuntu/venv/awx-build/bin/activate
   #     ansible-playbook build.yml
   ansible.builtin.command:
-    cmd: "ansible-playbook build.yml -v"
+    cmd: "ansible-playbook build.yml -v -e awx_version={{ awx_version }}"
     chdir: "{{ BASE_DIR }}/awx/tools/ansible"
+    # バージョンをパラメタで与えればmakeとPython3.9に依存した処理は行われない
 
 - name: push container image
   community.docker.docker_image:

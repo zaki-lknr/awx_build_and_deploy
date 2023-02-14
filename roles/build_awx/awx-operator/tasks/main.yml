@@ -19,6 +19,14 @@
 # #      make docker-build IMAGE_TAG_BASE=zakihmkc/awx-operator VERSION=0.17.0-arm
 #     chdir: "{{ BASE_DIR }}/awx-operator"
 
+- name: update init container path
+  ansible.builtin.replace:
+    path: "{{ BASE_DIR }}/awx-operator/roles/installer/defaults/main.yml"
+    regexp: 'quay.io/ansible/awx-ee.*'
+    replace: "{{ awx_ee_image_repository }}:{{ awx_ee_version }}"
+  tags:
+    - edit_init_container
+
 - name: build awx-operator
   community.general.make:
     chdir: "{{ BASE_DIR }}/awx-operator"
