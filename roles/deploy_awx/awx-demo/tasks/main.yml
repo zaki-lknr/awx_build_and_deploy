@@ -1,14 +1,16 @@
 ---
-- name: create namespace
-  kubernetes.core.k8s:
-    kubeconfig: /etc/rancher/k3s/k3s.yaml
-    state: present
-    name: "{{ awx_namespace }}"
-    kind: Namespace
-    api_version: v1
+- name: create working directory
+  ansible.builtin.file:
+    state: directory
+    path: "{{ BASE_DIR }}/awx"
+
+- name: create awx manifest file
+  ansible.builtin.template:
+    src: awx-demo.yaml.j2
+    dest: "{{ BASE_DIR }}/awx/awx-demo.yaml"
 
 - name: deploy awx-demo
   kubernetes.core.k8s:
     state: present
     kubeconfig: /etc/rancher/k3s/k3s.yaml
-    template: awx-demo.yaml.j2
+    src: "{{ BASE_DIR }}/awx/awx-demo.yaml"
