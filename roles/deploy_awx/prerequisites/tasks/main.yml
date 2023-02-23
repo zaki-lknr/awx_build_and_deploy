@@ -2,8 +2,8 @@
 - name: install packages
   ansible.builtin.apt:
     name:
-      - make
       - python3-pip
+      - git          # kustomizeがgit参照する定義のため依存している
       # - tox
       # - ansible
     update_cache: true
