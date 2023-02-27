@@ -1,22 +1,5 @@
 ---
 - name: install k3s
   ansible.builtin.shell:
-    cmd: curl -sfL https://get.k3s.io | sh -
+    cmd: curl -sfL https://get.k3s.io | sh -s - --write-kubeconfig-mode 644
     creates: /etc/systemd/system/k3s.service
-
-- name: set permission kubeconfig for user
-  ansible.builtin.file:
-    path: /etc/rancher/k3s/k3s.yaml
-    mode: '0644'  # OSをrebootするとパーミッションがリセットする
-
-# - name: create kubeconfig directory
-#   ansible.builtin.file:
-#     state: directory
-#     path: "{{ ansible_env.PWD }}/.kube/"
-
-# - name:
-#   ansible.builtin.copy:
-#     src: /etc/rancher/k3s/k3s.yaml
-#     dest: "{{ ansible_env.PWD }}/.kube/config"
-#     remote_src: true
-#     owner: "{{ ansible_env.SUDO_UID | default(ansible_env.USER) }}"
