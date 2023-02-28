@@ -15,7 +15,7 @@
 - name: install pip packages
   ansible.builtin.pip:
     name:
-      - openshift==0.13.1
+      - kubernetes==12.0.0
 
 - name: define repository url
   set_fact:
