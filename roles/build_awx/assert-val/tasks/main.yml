@@ -1,0 +1,12 @@
+- name: assertion values
+  ansible.builtin.assert:
+    that:
+      - ansible_builder_version is defined
+      - ansible_runner_version is defined
+      - awx_version is defined
+      - awx_ee_src_version is defined
+      - awx_ee_version is defined
+      - receptor_version is defined
+      - operator_version is defined
+      - python_base_version is defined
+      - python_builder_version is defined
