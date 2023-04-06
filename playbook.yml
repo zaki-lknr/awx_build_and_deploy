@@ -5,6 +5,7 @@
     - min
 
   roles:
+    - build_awx/assert-val
     - build_awx/prerequisites
     - build_awx/awx-operator
     - build_awx/receptor
