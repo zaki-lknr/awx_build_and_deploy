@@ -5,16 +5,24 @@
     - min
 
   roles:
-    - build_awx/assert-val
-    - build_awx/prerequisites
-    - build_awx/awx-operator
-    - build_awx/receptor
-    - build_awx/python-base
-    - build_awx/python-builder
-    - build_awx/ansible-runner
-    - build_awx/ansible-builder
-    - build_awx/awx-ee
-    - build_awx/awx
+    - role: build_awx/assert-val
+    - role: build_awx/prerequisites
+    - role: build_awx/awx-operator
+      tags: build_operator
+    - role: build_awx/receptor
+      tags: build_operator
+    - role: build_awx/python-base
+      tags: build_python_base
+    - role: build_awx/python-builder
+      tags: build_python_builder
+    - role: build_awx/ansible-runner
+      tags: build_ansible_runner
+    - role: build_awx/ansible-builder
+      tags: build_ansible_builder
+    - role: build_awx/awx-ee
+      tags: build_awx_ee
+    - role: build_awx/awx
+      tags: build_awx
 
 - hosts: deploy
   gather_facts: true
@@ -22,7 +30,9 @@
     - min
 
   roles:
-    - deploy_awx/assert-val
-    - deploy_awx/prerequisites
-    - deploy_awx/awx-operator
-    - deploy_awx/awx-demo
+    - role: deploy_awx/assert-val
+    - role: deploy_awx/prerequisites
+    - role: deploy_awx/awx-operator
+      tags: deploy_awx_operator
+    - role: deploy_awx/awx-demo
+      tags: deploy_awx
