@@ -11,7 +11,7 @@
     - role: build_awx/awx-operator
       tags: build_operator
     - role: build_awx/receptor
-      tags: build_operator
+      tags: build_receptor
     - role: build_awx/python-base
       tags: build_python_base
     - role: build_awx/python-builder
