@@ -55,6 +55,6 @@
     build:
       path: "{{ BASE_DIR }}"
     repository: "{{ awx_ee_image_repository }}:{{ awx_ee_version }}"
-    push: true
+    push: push_image | bool is true
     force_tag: true
     force_source: true  ## runner/builderに更新があった場合…

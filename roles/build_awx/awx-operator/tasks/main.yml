@@ -40,6 +40,7 @@
     repository: "{{ operator_image_repository }}:{{ operator_version }}"
     push: true
     source: local
+  when: push_image | bool is true
 
 # - name: deploy awx-operator
 #   community.general.make:

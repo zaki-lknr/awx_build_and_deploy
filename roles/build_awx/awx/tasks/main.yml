@@ -27,3 +27,4 @@
     repository: "{{ awx_image_repository }}:{{ awx_version }}"
     push: true
     source: local
+  when: push_image | bool is true
