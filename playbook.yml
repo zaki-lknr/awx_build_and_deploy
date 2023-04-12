@@ -7,6 +7,7 @@
   roles:
     - role: build_awx/assert-val
     - role: build_awx/prerequisites
+      tags: always
     - role: build_awx/awx-operator
       tags: build_operator
     - role: build_awx/receptor
@@ -32,6 +33,7 @@
   roles:
     - role: deploy_awx/assert-val
     - role: deploy_awx/prerequisites
+      tags: always
     - role: deploy_awx/awx-operator
       tags: deploy_awx_operator
     - role: deploy_awx/awx-demo
